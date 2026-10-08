@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>EzTodo</title>
+<title>to do list</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -23,6 +23,16 @@
   <div class="spot" id="spot"></div>
   <div class="grain"></div>
   <div class="vignette"></div>
+</div>
+
+<!-- Dev tools (left side) -->
+<div class="dev" id="dev">
+  <button type="button" class="devswitch" id="devSwitch" role="switch" aria-checked="false" aria-label="Dev mode"><span class="knob"></span></button>
+  <span class="dev-label">Dev mode</span>
+  <button type="button" class="devsky" id="btnDevSky" hidden title="Open the dev constellation (skips the 7-day lock)">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.3 5.1 5.5.6-4.1 3.7 1.2 5.5L12 15.6 7.1 18.4l1.2-5.5L4.2 9.2l5.5-.6z"/></svg>
+    <span>Dev constellation</span>
+  </button>
 </div>
 
 <!-- Floating tools -->
@@ -60,6 +70,8 @@
     <div class="progress" aria-hidden="true"><span id="bar"></span></div>
   </header>
 
+  <nav class="lists" id="lists" aria-label="Lists"></nav>
+
   <div class="field" id="field">
     <div class="glow" aria-hidden="true"></div>
     <input id="input" type="text" placeholder="What needs doing?" autocomplete="off" autocapitalize="sentences" maxlength="140" aria-label="Add a task">
@@ -92,6 +104,28 @@
       <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg>
     </button>
     <div id="skyBody"></div>
+  </div>
+</section>
+
+<!-- New / edit list -->
+<section class="dlg" id="dlg" role="dialog" aria-modal="true" aria-labelledby="dlgTitle" hidden>
+  <div class="dlg-card">
+    <h2 id="dlgTitle">New list</h2>
+    <label class="fld"><span>List name</span>
+      <input id="dlgName" type="text" maxlength="40" autocomplete="off" placeholder="Thesis, Personal, Project...">
+    </label>
+    <label class="fld"><span>Constellation name <em>(optional)</em></span>
+      <input id="dlgCName" type="text" maxlength="40" autocomplete="off" placeholder="Leave empty for an auto name each week">
+    </label>
+    <div class="fld"><span>Star colors</span><div class="swatches" id="dlgColors" role="radiogroup" aria-label="Star colors"></div></div>
+    <div class="fld"><span>Shape</span><div class="shapes" id="dlgShapes" role="radiogroup" aria-label="Constellation shape"></div></div>
+    <div class="dlg-prev" id="dlgPrev" aria-hidden="true"></div>
+    <div class="dlg-actions">
+      <button type="button" class="dlg-del" id="dlgDelete" hidden>Delete list</button>
+      <span class="grow"></span>
+      <button type="button" class="ghost-btn" id="dlgCancel">Cancel</button>
+      <button type="button" class="solid-btn" id="dlgSave">Create</button>
+    </div>
   </div>
 </section>
 
